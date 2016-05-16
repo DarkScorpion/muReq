@@ -1,0 +1,29 @@
+
+#Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+#WebStorm
+.idea/
+
+#nodejs module
+/node_modules/
+
+# Windows image file caches
+Thumbs.db
+*.dbmdl
+*.Cache
+~$*
+
+# Folder config file
+Desktop.ini
+
+# Unit test / coverage reports
+.coverage
+.tox
+
+#Translations
+*.mo
+
+# Mac crap
+.DS_Store
