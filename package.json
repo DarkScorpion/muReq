@@ -1,0 +1,36 @@
+{
+  "name": "mureq",
+  "version": "0.9.0",
+  "description": "Module for Node.js, allows you to make multiple requests. It uses Promises.",
+  "main": "lib/multi-request.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "request": "^2.72.0"
+  },
+  "devDependencies": {
+    "express": "^4.13.4",
+    "mocha": "^2.2.5"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DarkScorpion/muReq.git"
+  },
+  "keywords": [
+    "node.js",
+    "multi-request",
+    "request",
+    "module",
+    "promise"
+  ],
+  "author": "Alex Smith",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DarkScorpion/muReq/issues"
+  },
+  "homepage": "https://github.com/DarkScorpion/muReq"
+}
