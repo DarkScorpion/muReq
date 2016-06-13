@@ -75,6 +75,41 @@ describe('Myltiple request', () => {
       testMuReq(input, echoObj, done);
     });
   });
+
+  describe('Query test', () => {
+    it('Array', (done) => {
+      var queryArr = ['?p1=ccc', '?p2=zzz', '?p1=aaa&p2=bbb'];
+
+      var input = [];
+      for(var i=0; i<queryArr.length; i++) {
+        input.push(_baseUrl+'/query'+queryArr[i]);
+      }
+      var output = ['ccc ???', '??? zzz', 'aaa bbb'];
+
+      testMuReq(input, output, done);
+    });
+
+    it('Object', (done) => {
+      var queryObj = {
+        a1: '?p1=ccc',
+        a2: '?p2=zzz',
+        a3: '?p1=aaa&p2=bbb'
+      };
+
+      var input = {};
+      for(var key in queryObj) {
+        input[key] = _baseUrl+'/query'+queryObj[key];
+      }
+      var output = {
+        a1: 'ccc ???',
+        a2: '??? zzz',
+        a3: 'aaa bbb'
+      };
+
+      testMuReq(input, output, done);
+    });
+
+  });
   
 
   after( () => {

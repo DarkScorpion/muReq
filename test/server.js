@@ -10,7 +10,10 @@ app.get('/', (req, res) => {
 //Query routes
 app.get('/query', (req, res) => {
   var q = req.query;
-  res.send(q.p1+' '+q.p2);
+  var p1 = q.p1 || '???';
+  var p2 = q.p2 || '???';
+  var result = p1+' '+p2;
+  res.send(result);
 });
 
 //Param routes
