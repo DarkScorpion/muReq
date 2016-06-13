@@ -1,5 +1,5 @@
 'use strict';
-var assert  =require('assert');
+var assert = require('assert');
 
 var app = require('./server.js');
 var muReq = require('../lib/multi-request.js');
