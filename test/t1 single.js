@@ -4,9 +4,9 @@ var request = require('request');
 
 var app = require('./server.js');
 
-var _port = 3001;
-var _server = app.listen(_port);
-var _baseUrl = 'http://localhost:'+_port;
+const PORT = 3001;
+const SERVER = app.listen(PORT);
+const BASE_URL = 'http://localhost:'+PORT;
 
 describe('Check server', () => {
   it('/ GET', (done) => {
@@ -63,14 +63,14 @@ describe('Check server', () => {
   });
 
   after( () => {
-    _server.close();
+    SERVER.close();
   });
 
 });
 
 function testRequest(route, method, cb) {
   request({
-    url: _baseUrl+route,
+    url: BASE_URL+route,
     method: method,
   }, (err, res, body) => {
     cb(err, res, body);

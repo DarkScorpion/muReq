@@ -1,24 +1,24 @@
 'use strict';
-var assert  =require('assert');
+var assert = require('assert');
 
 var app = require('./server.js');
 var muReq = require('../lib/multi-request.js');
 
-var _port = 3002;
-var _server = app.listen(_port);
-var _baseUrl = 'http://localhost:'+_port;
+const PORT = 3002;
+const SERVER = app.listen(PORT);
+const BASE_URL = 'http://localhost:'+PORT;
 
 describe('Myltiple request', () => {
   describe('Single request', () => {
     it('Single', (done) => {
-      var url = _baseUrl+'/';
+      var url = BASE_URL+'/';
       testMuReq(url, 'ok', done);
     })
   });
 
   describe('Types test', () => {
     it('Array', (done) => {
-      var typesUrl = _baseUrl+'/types';
+      var typesUrl = BASE_URL+'/types';
       var input = [
         {url: typesUrl, method: 'get'},
         {url: typesUrl, method: 'post'},
@@ -30,7 +30,7 @@ describe('Myltiple request', () => {
     })
 
     it('Object', (done) => {
-      var typesUrl = _baseUrl+'/types';
+      var typesUrl = BASE_URL+'/types';
       var input = {
         get: {url: typesUrl, method: 'get'},
         post: {url: typesUrl, method: 'post'},
@@ -54,7 +54,7 @@ describe('Myltiple request', () => {
       
       var input = [];
       for(var i=0; i<echoArr.length; i++) {
-        input.push(_baseUrl+'/echo/'+echoArr[i]);
+        input.push(BASE_URL+'/echo/'+echoArr[i]);
       }
       
       testMuReq(input, echoArr, done);
@@ -69,7 +69,7 @@ describe('Myltiple request', () => {
       
       var input = {};
       for(var key in echoObj) {
-        input[key] = _baseUrl+'/echo/'+echoObj[key];
+        input[key] = BASE_URL+'/echo/'+echoObj[key];
       }
 
       testMuReq(input, echoObj, done);
@@ -82,7 +82,7 @@ describe('Myltiple request', () => {
 
       var input = [];
       for(var i=0; i<queryArr.length; i++) {
-        input.push(_baseUrl+'/query'+queryArr[i]);
+        input.push(BASE_URL+'/query'+queryArr[i]);
       }
       var output = ['ccc ???', '??? zzz', 'aaa bbb'];
 
@@ -98,7 +98,7 @@ describe('Myltiple request', () => {
 
       var input = {};
       for(var key in queryObj) {
-        input[key] = _baseUrl+'/query'+queryObj[key];
+        input[key] = BASE_URL+'/query'+queryObj[key];
       }
       var output = {
         a1: 'ccc ???',
@@ -113,7 +113,7 @@ describe('Myltiple request', () => {
   
 
   after( () => {
-    _server.close();
+    SERVER.close();
   });
 
 });

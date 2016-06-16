@@ -4,38 +4,38 @@ var assert = require('assert');
 var app = require('./server.js');
 var muReq = require('../lib/multi-request.js');
 
-var _port = 3004;
-var _server = app.listen(_port);
-var _baseUrl = 'http://localhost:'+_port;
+const PORT = 3004;
+const SERVER = app.listen(PORT);
+const BASE_URL = 'http://localhost:'+PORT;
 
-var _errTypes = {
+const ERRORS = {
   notUrl: new Error('Invalid URI "notUrl"')
 }
 
 describe('Error in requests', () => {
   it('Array', (done) => {
     var input = [
-      _baseUrl+'/',
-      _baseUrl+'/emptyRoute',
+      BASE_URL+'/',
+      BASE_URL+'/route404',
       'notUrl'
     ];
-    var output = [ 'ok', null, _errTypes.notUrl ];
+    var output = [ 'ok', null, ERRORS.notUrl ];
 
     testMuReq(input, output, done);
   });
 
   it('Object', (done) => {
     var input = {
-      a: _baseUrl+'/',
-      b: _baseUrl+'/emptyRoute',
-      c: _baseUrl+'/types',
+      a: BASE_URL+'/',
+      b: BASE_URL+'/route404',
+      c: BASE_URL+'/types',
       d: 'notUrl'
     };
     var output = {
       a: 'ok',
       b: null,
       c: 'get ok',
-      d: _errTypes.notUrl
+      d: ERRORS.notUrl
     };
 
     testMuReq(input, output, done);
@@ -43,7 +43,7 @@ describe('Error in requests', () => {
   
 
   after( () => {
-    _server.close();
+    SERVER.close();
   });
 
 });
