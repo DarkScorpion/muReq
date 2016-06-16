@@ -6,7 +6,7 @@ Module for multiple requests. It takes an array or object with the address of th
 ### Examples
 ##### Single request
 ```js
-var muReq = require('muReq');
+var muReq = require('mureq');
 var url = 'http://test.zz/';
 
 muReq(url)
@@ -71,7 +71,7 @@ Function return body of response, if not errors and status code 200. If there is
 ```js
 var reqData = [
   url+'1',
-  url+'/emptyRoute',
+  url+'/route404',
   'notUrl'
 ];
 muReq(reqData)
