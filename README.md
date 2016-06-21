@@ -1,15 +1,20 @@
-## muReq - Multiple request [![Build Status](https://travis-ci.org/DarkScorpion/muReq.svg?branch=m)](https://travis-ci.org/DarkScorpion/muReq)
+## muReq - Multiple request [![Build Status](https://travis-ci.org/DarkScorpion/muReq.svg?branch=dev)](https://travis-ci.org/DarkScorpion/muReq)
 
 Module for multiple requests. It takes an array or object with the address of the request. Returns Promise with an array or object containing the result. Possible single request and customization of each individual request.  
 **Warning**: Function return body of response, if not errors and status code 200. See [errors example](#errors).
 
 ### Examples
+```js
+var muReqClass = require('mureq');
+var muReq1 = new muReqClass(); //default settings
+var muReq2 = new muReqClass({errCoef: 0.9}); //custom settings
+```
+
 ##### Single request
 ```js
-var muReq = require('mureq');
 var url = 'http://test.zz/';
 
-muReq(url)
+muReq.request(url)
   .then( (result) => {
     console.log(result) //=> 'ok'
   })
@@ -21,13 +26,13 @@ muReq(url)
 ##### Multi request
 ```js
 //Multi request (array)
-muReq( [url+'1', url+'2', url+'3'] )
+muReq.request( [url+'1', url+'2', url+'3'] )
   .then( (result) => {
     console.log(result) //=> [ 'get 1', 'get 2', 'get 3' ]
   })
 
 //Multi request (object)
-muReq( {a1: url+'1', a2: url+'2', a3: url+'3'} )
+muReq.request( {a1: url+'1', a2: url+'2', a3: url+'3'} )
   .then( (result) => {
     console.log(result) //=> { a1: 'get 1', a2: 'get 2', a3: 'get 3' }
   })
@@ -42,13 +47,13 @@ var reqObj = {
   a2: url+'2', //default method: GET
   a3: {url: url+'3', method: 'put'}
 }
-muReq(reqObj)
+muReq.request(reqObj)
   .then( (result) => {
     console.log(result) //=> { a1: 'post 1', a2: 'get 2', a3: 'put 3' }
   })
 
 //Specify the multi request method
-muReq( [url+'1', url+'2', url+'3'], 'post' )
+muReq.request( [url+'1', url+'2', url+'3'], 'post' )
   .then( (result) => {
     console.log(result) //=> [ 'post 1', 'post 2', 'post 3' ]
   })
@@ -60,22 +65,31 @@ var reqData = [
   {url: url+'3', method: 'delete'},
   url+'4',
 ]
-muReq(reqData, 'post')
+muReq.request(reqData, 'post')
   .then( (result) => {
     console.log(result) //=> [ 'put 1', 'post 2', 'delete 3', 'post 4' ]
   })
 ```
+##### Settings
+You can customizate sittengs for you tasks.
+```js
+//Field of settings and their default value
+{
+  errCoef: 0.2, // if errors more 20%, promise return error;
+  notCheckStatus: false // 404 and other status, considered an error
+}
+```
 
 ##### Errors
-Function return body of response, if not errors and status code 200. If there is no error, but the status code is not equal to 200, it will be returned to null.
+Function return body of response, if not errors and status code 200. If there is no error, but the status code is not equal to 200, it will be returned Error('Status code, is not 200'). Use settings field "notCheckStatus", if status code, not need check.
 ```js
 var reqData = [
   url+'1',
   url+'/route404',
   'notUrl'
 ];
-muReq(reqData)
+muReq.request(reqData)
   .then( (result) => {
-    console.log(result) //=> [ 'get 1', null, Error('Invalid URI "notUrl"') ]
+    console.log(result) //=> [ 'get 1', Error('Status code, is not 200'), Error('Invalid URI "notUrl"') ]
   })
 ```

@@ -9,7 +9,7 @@ const SERVER = app.listen(PORT);
 const BASE_URL = 'http://localhost:'+PORT;
 
 describe('Check server', () => {
-  it('/ GET', (done) => {
+  it('/index GET', (done) => {
     testRequest('/', 'get', (err, res, body) => {
       assert.equal(err, null);
       assert.equal(res.statusCode , 200);

@@ -2,7 +2,8 @@
 var assert = require('assert');
 
 var app = require('./server.js');
-var muReq = require('../lib/multi-request.js');
+var muReqClass = require('../lib/multi-request.js');
+var muReq = new muReqClass();
 
 const PORT = 3002;
 const SERVER = app.listen(PORT);
@@ -119,7 +120,7 @@ describe('Myltiple request', () => {
 });
 
 function testMuReq(input, output, done) {
-  muReq(input)
+  muReq.request(input)
     .then( (result) => {
       assert.deepEqual(output, result);
       done();

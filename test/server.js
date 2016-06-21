@@ -36,4 +36,10 @@ app.delete('/types', (req, res) => {
   res.send('delete ok');
 });
 
+//Route404
+app.get('*', (req, res) => {
+  res.status(404);
+  res.send('404');
+});
+
 module.exports = app;
