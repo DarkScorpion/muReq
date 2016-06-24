@@ -92,26 +92,27 @@ describe('Settings', () => {
   describe('Not check status option', () => {
     var baseInput = [
       BASE_URL+'/',
-      BASE_URL+'/',
       BASE_URL+'/route404',
-      'notUrl',
+      BASE_URL+'/route404',
       'notUrl'
     ];
 
     it('Check status', (done) => {
       var output = [
-        'ok', 'ok',
+        'ok',
         ERRORS.not200,
-        ERRORS.notUrl, ERRORS.notUrl
+        ERRORS.not200,
+        ERRORS.notUrl
       ];
       testMuReq(baseInput, output, done, {errCoef: 0.8, notCheckStatus: false});
     });
 
     it('Not check status', (done) => {
       var output = [
-        'ok', 'ok',
+        'ok',
         '404',
-        ERRORS.notUrl, ERRORS.notUrl
+        '404',
+        ERRORS.notUrl
       ];
 
       testMuReq(baseInput, output, done, {errCoef: 0.8, notCheckStatus: true});
