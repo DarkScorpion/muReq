@@ -9,6 +9,7 @@ const PORT = 3002;
 const SERVER = app.listen(PORT);
 const BASE_URL = 'http://localhost:'+PORT;
 
+
 describe('Myltiple request', () => {
   describe('Single request', () => {
     it('Single', (done) => {
@@ -18,8 +19,9 @@ describe('Myltiple request', () => {
   });
 
   describe('Types test', () => {
+    var typesUrl = BASE_URL+'/types';
+    
     it('Array', (done) => {
-      var typesUrl = BASE_URL+'/types';
       var input = [
         {url: typesUrl, method: 'get'},
         {url: typesUrl, method: 'post'},
@@ -31,7 +33,6 @@ describe('Myltiple request', () => {
     })
 
     it('Object', (done) => {
-      var typesUrl = BASE_URL+'/types';
       var input = {
         get: {url: typesUrl, method: 'get'},
         post: {url: typesUrl, method: 'post'},

@@ -10,15 +10,15 @@ const SERVER = app.listen(PORT);
 const BASE_URL = 'http://localhost:'+PORT;
 
 describe('Mix type request', () => {
+  var typesUrl = BASE_URL+'/types';
+
   it('/types PUT (array)', (done) => {
-    var typesUrl = BASE_URL+'/types';
     var input = [ typesUrl, typesUrl, typesUrl ];
     var output = [ 'put ok', 'put ok', 'put ok' ];
     testMuReq(input, output, done, 'put');
   })
 
   it('/types POST (object)', (done) => {
-    var typesUrl = BASE_URL+'/types';
     var input = {
       get1: {url: typesUrl, method: 'get'},
       post1: typesUrl,
@@ -39,7 +39,7 @@ describe('Mix type request', () => {
   });
 
   it('/types DELETE (single)', (done) => {
-    var input = BASE_URL+'/types';
+    var input = typesUrl;
     var output = 'delete ok';
     testMuReq(input, output, done, 'delete');
   });
