@@ -14,7 +14,7 @@ var muReq2 = new muReqClass({errCoef: 0.9}); //custom settings
 ```js
 var url = 'http://test.zz/';
 
-muReq.request(url)
+muReq.get(url)
   .then( (result) => {
     console.log(result) //=> 'ok'
   })
@@ -26,13 +26,13 @@ muReq.request(url)
 ##### Multi request
 ```js
 //Multi request (array)
-muReq.request( [url+'1', url+'2', url+'3'] )
+muReq.get( [url+'1', url+'2', url+'3'] )
   .then( (result) => {
     console.log(result) //=> [ 'get 1', 'get 2', 'get 3' ]
   })
 
 //Multi request (object)
-muReq.request( {a1: url+'1', a2: url+'2', a3: url+'3'} )
+muReq.get( {a1: url+'1', a2: url+'2', a3: url+'3'} )
   .then( (result) => {
     console.log(result) //=> { a1: 'get 1', a2: 'get 2', a3: 'get 3' }
   })
@@ -47,13 +47,13 @@ var reqObj = {
   a2: url+'2', //default method: GET
   a3: {url: url+'3', method: 'put'}
 }
-muReq.request(reqObj)
+muReq.get(reqObj)
   .then( (result) => {
     console.log(result) //=> { a1: 'post 1', a2: 'get 2', a3: 'put 3' }
   })
 
 //Specify the multi request method
-muReq.request( [url+'1', url+'2', url+'3'], 'post' )
+muReq.post( [url+'1', url+'2', url+'3'] )
   .then( (result) => {
     console.log(result) //=> [ 'post 1', 'post 2', 'post 3' ]
   })
@@ -65,7 +65,7 @@ var reqData = [
   {url: url+'3', method: 'delete'},
   url+'4',
 ]
-muReq.request(reqData, 'post')
+muReq.post(reqData)
   .then( (result) => {
     console.log(result) //=> [ 'put 1', 'post 2', 'delete 3', 'post 4' ]
   })
