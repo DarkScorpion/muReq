@@ -49,6 +49,32 @@ describe('Myltiple request', () => {
     })
   });
 
+  describe('Methods test', () => {
+    var typesUrl = BASE_URL+'/types';
+    var methodsInput = [typesUrl, typesUrl, typesUrl];
+
+    it('get', (done) => {
+      var output = ['get ok', 'get ok', 'get ok'];
+      testPromiseResult( muReq.get(methodsInput), output, done );
+    })
+
+    it('post', (done) => {
+      var output = ['post ok', 'post ok', 'post ok'];
+      testPromiseResult( muReq.post(methodsInput), output, done );
+    })
+
+    it('put', (done) => {
+      var output = ['put ok', 'put ok', 'put ok'];
+      testPromiseResult( muReq.put(methodsInput), output, done );
+    })
+
+    it('delete', (done) => {
+      var output = ['delete ok', 'delete ok', 'delete ok'];
+      testPromiseResult( muReq.delete(methodsInput), output, done );
+    })
+
+  });
+
   describe('Echo test', () => {
     it('Array', (done) => {
       var echoArr = ['aaa', 'bbb'];
@@ -112,7 +138,6 @@ describe('Myltiple request', () => {
 
   });
   
-
   after( () => {
     SERVER.close();
   });
@@ -120,7 +145,11 @@ describe('Myltiple request', () => {
 });
 
 function testMuReq(input, output, done) {
-  muReq.request(input)
+  testPromiseResult( muReq.request(input), output, done );
+}
+
+function testPromiseResult(resPromise, output, done) {
+  resPromise
     .then( (result) => {
       assert.deepEqual(output, result);
       done();
