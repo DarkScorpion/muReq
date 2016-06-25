@@ -1,16 +1,22 @@
-## muReq - Multiple request [![Build Status](https://travis-ci.org/DarkScorpion/muReq.svg?branch=m)](https://travis-ci.org/DarkScorpion/muReq)
+## muReq - Multiple Request [![Build Status](https://travis-ci.org/DarkScorpion/muReq.svg?branch=m)](https://travis-ci.org/DarkScorpion/muReq)
 
 Module for multiple requests. It takes an array or object with the address of the request. Returns Promise with an array or object containing the result. Possible single request and customization of each individual request.  
 **Warning**: Function return body of response, if not errors and status code 200. But it can be disabled, see [errors example](#errors).
 
-### Examples
-```js
-var muReqClass = require('mureq');
-var muReq1 = new muReqClass(); //default settings
-var muReq2 = new muReqClass({errCoef: 0.9}); //custom settings
+### Install
+```
+npm install mureq
 ```
 
-##### Single request
+### Examples
+#### Start
+```js
+var muReqClass = require('mureq');
+var muReq = new muReqClass(); //default settings
+var muReqCustom = new muReqClass({errCoef: 0.9}); //custom settings
+```
+
+#### Single request
 ```js
 var url = 'http://test.zz/';
 
@@ -23,7 +29,7 @@ muReq.get(url)
   });
 ```
 
-##### Multi request
+#### Multi request
 ```js
 //Multi request (array)
 muReq.get( [url+'1', url+'2', url+'3'] )
@@ -38,7 +44,7 @@ muReq.get( {a1: url+'1', a2: url+'2', a3: url+'3'} )
   })
 ```
 
-##### Customization requests
+#### Customization requests
 For custom request, use object with field of module [request](https://www.npmjs.com/package/request)
 ```js
 //Custom metods
@@ -70,7 +76,7 @@ muReq.post(reqData)
     console.log(result) //=> [ 'put 1', 'post 2', 'delete 3', 'post 4' ]
   })
 ```
-##### Settings
+#### Settings
 You can customizate sittengs for you tasks.
 ```js
 
@@ -80,7 +86,7 @@ You can customizate sittengs for you tasks.
 }
 ```
 
-##### Errors
+#### Errors
 Function return body of response, if not errors and status code 200. If there is no error, but the status code is not equal to 200, it will be returned Error('Status code, is not 200'). 
 ```js
 var reqData = [
@@ -96,13 +102,4 @@ muReq.request(reqData)
 If you need all the status codes, use
 ```js
 muReq.setSettings({checkStatus: false});
-var reqData = [
-  url+'1',
-  url+'/route404',
-  'notUrl'
-];
-muReq.request(reqData)
-  .then( (result) => {
-    console.log(result) //=> [ 'get 1', '404 Route welcomes you', Error('Invalid URI "notUrl"') ]
-  })
 ```
