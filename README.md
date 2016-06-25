@@ -73,15 +73,15 @@ muReq.post(reqData)
 ##### Settings
 You can customizate sittengs for you tasks.
 ```js
-//Field of settings and their default value
-{
+
+{ //Field of settings and their default value
   errCoef: 0.2, // if errors more 20%, promise return error;
-  notCheckStatus: false // 404 and other status, considered an error
+  checkStatus: true // 404 and other status, considered an error
 }
 ```
 
 ##### Errors
-Function return body of response, if not errors and status code 200. If there is no error, but the status code is not equal to 200, it will be returned Error('Status code, is not 200'). Use settings field "notCheckStatus", if status code, not need check.
+Function return body of response, if not errors and status code 200. If there is no error, but the status code is not equal to 200, it will be returned Error('Status code, is not 200'). 
 ```js
 var reqData = [
   url+'1',
@@ -91,5 +91,18 @@ var reqData = [
 muReq.request(reqData)
   .then( (result) => {
     console.log(result) //=> [ 'get 1', Error('Status code, is not 200'), Error('Invalid URI "notUrl"') ]
+  })
+```
+If you need all the status codes, use
+```js
+muReq.setSettings({checkStatus: false});
+var reqData = [
+  url+'1',
+  url+'/route404',
+  'notUrl'
+];
+muReq.request(reqData)
+  .then( (result) => {
+    console.log(result) //=> [ 'get 1', '404 Route welcomes you', Error('Invalid URI "notUrl"') ]
   })
 ```
