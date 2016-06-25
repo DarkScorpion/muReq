@@ -1,6 +1,6 @@
 {
   "name": "mureq",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Module for Node.js, allows you to make multiple requests. It uses Promises.",
   "main": "lib/multi-request.js",
   "directories": {
@@ -27,6 +27,9 @@
     "module",
     "promise"
   ],
+  "engines" : {
+    "node" : ">=4.0.0"
+  },
   "author": "Alex Smith",
   "license": "MIT",
   "bugs": {
