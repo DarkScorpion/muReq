@@ -82,7 +82,7 @@ You can customizate sittengs for you tasks.
 
 { //Field of settings and their default value
   errCoef: 0.2, // if errors more 20%, promise return error;
-  checkStatus: true // 404 and other status, considered an error
+  checkStatusCode: true // 404 and other status, considered an error
 }
 ```
 
@@ -101,5 +101,5 @@ muReq.request(reqData)
 ```
 If you need all the status codes, use
 ```js
-muReq.setSettings({checkStatus: false});
+muReq.setSettings({checkStatusCode: false});
 ```
