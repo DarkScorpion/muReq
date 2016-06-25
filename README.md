@@ -1,4 +1,4 @@
-## muReq - Multiple request [![Build Status](https://travis-ci.org/DarkScorpion/muReq.svg?branch=dev)](https://travis-ci.org/DarkScorpion/muReq)
+## muReq - Multiple request [![Build Status](https://travis-ci.org/DarkScorpion/muReq.svg?branch=m)](https://travis-ci.org/DarkScorpion/muReq)
 
 Module for multiple requests. It takes an array or object with the address of the request. Returns Promise with an array or object containing the result. Possible single request and customization of each individual request.  
 **Warning**: Function return body of response, if not errors and status code 200. See [errors example](#errors).
