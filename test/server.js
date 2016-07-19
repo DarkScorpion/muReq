@@ -37,9 +37,14 @@ app.delete('/types', (req, res) => {
 });
 
 //Route404
-app.get('*', (req, res) => {
-  res.status(404);
-  res.send('404');
+app.get('/route404', (req, res) => {
+  res.status(404).send('404');
+});
+
+//Other routes
+app.all('*', (req, res) => {
+  console.log('Warning: strange route: %s %s', req.path, req.method);
+  res.status(404).send('=?=');
 });
 
 module.exports = app;

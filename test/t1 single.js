@@ -62,6 +62,15 @@ describe('Check server', () => {
     });
   });
 
+  it('/route404 GET', (done) => {
+    testRequest('/route404', 'get', (err, res, body) => {
+      assert.equal(err, null);
+      assert.equal(res.statusCode , 404);
+      assert.equal(body, '404');
+      done();
+    });
+  });
+
   after( () => {
     SERVER.close();
   });
