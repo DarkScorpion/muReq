@@ -16,33 +16,46 @@ const ERRORS = {
 };
 
 describe('Error in requests', () => {
-  it('Array', (done) => {
-    var input = [
-      BASE_URL+'/',
-      BASE_URL+'/types',
-      BASE_URL+'/route404',
-      'notUrl'
-    ];
-    var output = [ 'ok', 'get ok', ERRORS.not200, ERRORS.notUrl ];
+  describe('Multiple', () => {
+    it('Array', (done) => {
+      var input = [
+        BASE_URL+'/',
+        BASE_URL+'/types',
+        BASE_URL+'/route404',
+        'notUrl'
+      ];
+      var output = [
+        'ok',
+        'get ok',
+        ERRORS.not200,
+        ERRORS.notUrl
+      ];
 
-    testMuReq(input, output, done);
+      testMuReq(input, output, done);
+    });
+
+    it('Object', (done) => {
+      var input = {
+        a: BASE_URL+'/',
+        b: BASE_URL+'/types',
+        c: BASE_URL+'/route404',
+        d: 'notUrl'
+      };
+      var output = {
+        a: 'ok',
+        b: 'get ok',
+        c: ERRORS.not200,
+        d: ERRORS.notUrl
+      };
+
+      testMuReq(input, output, done);
+    });
   });
 
-  it('Object', (done) => {
-    var input = {
-      a: BASE_URL+'/',
-      b: BASE_URL+'/route404',
-      c: BASE_URL+'/types',
-      d: 'notUrl'
-    };
-    var output = {
-      a: 'ok',
-      b: ERRORS.not200,
-      c: 'get ok',
-      d: ERRORS.notUrl
-    };
-
-    testMuReq(input, output, done);
+  describe('Single', () => {
+    it('Standart', (done) => {
+      testErr('notUrl', ERRORS.notUrl, done);
+    });
   });
 
   after( () => {
@@ -59,6 +72,18 @@ function testMuReq(input, output, done) {
     })
     .catch( (err) => {
       assert.fail();
+      done();
+    });
+}
+
+function testErr(input, output, done) {
+  muReq.request(input)
+    .then( (result) => {
+      assert.fail();
+      done();
+    })
+    .catch( (err) => {
+      assert.deepEqual(output, err);
       done();
     });
 }
