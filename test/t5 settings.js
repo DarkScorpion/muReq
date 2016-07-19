@@ -65,7 +65,7 @@ describe('Settings', () => {
     });
   });
 
-  describe('Error corficient option', () => {
+  describe('errCoef option', () => {
     var baseInput = [
       BASE_URL+'/',
       BASE_URL+'/',
@@ -89,33 +89,50 @@ describe('Settings', () => {
     });
   });
 
-  describe('Not check status option', () => {
-    var baseInput = [
-      BASE_URL+'/',
-      BASE_URL+'/route404',
-      BASE_URL+'/route404',
-      'notUrl'
-    ];
-
-    it('Check status', (done) => {
-      var output = [
-        'ok',
-        ERRORS.not200,
-        ERRORS.not200,
-        ERRORS.notUrl
+  describe('notCheckStatus option', () => {
+    describe('Multiple', () => {
+      var baseInput = [
+        BASE_URL+'/',
+        BASE_URL+'/route404',
+        BASE_URL+'/route404',
+        'notUrl'
       ];
-      testMuReq(baseInput, output, done, {errCoef: 0.8, checkStatusCode: true});
+
+      it('Check status', (done) => {
+        var output = [
+          'ok',
+          ERRORS.not200,
+          ERRORS.not200,
+          ERRORS.notUrl
+        ];
+        testMuReq(baseInput, output, done, {errCoef: 0.8, checkStatusCode: true});
+      });
+
+      it('Not check status', (done) => {
+        var output = [
+          'ok',
+          '404',
+          '404',
+          ERRORS.notUrl
+        ];
+
+        testMuReq(baseInput, output, done, {errCoef: 0.8, checkStatusCode: false});
+      });
     });
 
-    it('Not check status', (done) => {
-      var output = [
-        'ok',
-        '404',
-        '404',
-        ERRORS.notUrl
-      ];
+    describe('Single', () => {
+      var baseInput = BASE_URL+'/route404';
 
-      testMuReq(baseInput, output, done, {errCoef: 0.8, checkStatusCode: false});
+      it('Check status', (done) => {
+        var output = ERRORS.not200;
+        testErr( baseInput, output, done, {checkStatusCode: true} );
+      });
+
+      it('Not check status', (done) => {
+        var output = '404';
+        testMuReq( baseInput, output, done, {checkStatusCode: false} );
+      });
+
     });
   });
 
