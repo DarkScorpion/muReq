@@ -23,17 +23,8 @@ app.get('/echo/:p1', (req, res) => {
 });
 
 //Types routes
-app.get('/types', (req, res) => {
-  res.send('get ok');
-});
-app.post('/types', (req, res) => {
-  res.send('post ok');
-});
-app.put('/types', (req, res) => {
-  res.send('put ok');
-});
-app.delete('/types', (req, res) => {
-  res.send('delete ok');
+app.all('/types', (req, res) => {
+  res.send(req.method + ' ok');
 });
 
 //Route404

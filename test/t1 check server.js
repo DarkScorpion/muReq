@@ -20,28 +20,28 @@ describe('Check server', () => {
 
   it('/types GET', (done) => {
     testRequest('/types', 'get', (err, res, body) => {
-      assert.equal(body, 'get ok');
+      assert.equal(body, 'GET ok');
       done();
     });
   });
 
   it('/types POST', (done) => {
     testRequest('/types', 'post', (err, res, body) => {
-      assert.equal(body, 'post ok');
+      assert.equal(body, 'POST ok');
       done();
     });
   });
 
   it('/types PUT', (done) => {
     testRequest('/types', 'put', (err, res, body) => {
-      assert.equal(body, 'put ok');
+      assert.equal(body, 'PUT ok');
       done();
     });
   });
 
   it('/types DEL', (done) => {
     testRequest('/types', 'delete', (err, res, body) => {
-      assert.equal(body, 'delete ok');
+      assert.equal(body, 'DELETE ok');
       done();
     });
   });

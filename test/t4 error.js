@@ -26,7 +26,7 @@ describe('Error in requests', () => {
       ];
       var output = [
         'ok',
-        'get ok',
+        'GET ok',
         ERRORS.not200,
         ERRORS.notUrl
       ];
@@ -43,7 +43,7 @@ describe('Error in requests', () => {
       };
       var output = {
         a: 'ok',
-        b: 'get ok',
+        b: 'GET ok',
         c: ERRORS.not200,
         d: ERRORS.notUrl
       };

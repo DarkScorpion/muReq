@@ -13,8 +13,12 @@ describe('Mix type request', () => {
   var typesUrl = BASE_URL+'/types';
 
   it('/types PUT (array)', (done) => {
-    var input = [ typesUrl, typesUrl, typesUrl ];
-    var output = [ 'put ok', 'put ok', 'put ok' ];
+    var input = [
+    typesUrl, //default method
+    {url: typesUrl, method: 'post'},
+    {url: typesUrl, method: 'get'},
+    ];
+    var output = [ 'PUT ok', 'POST ok', 'GET ok' ];
     testMuReq(input, output, done, 'put');
   })
 
@@ -28,19 +32,19 @@ describe('Mix type request', () => {
       delete: {url: typesUrl, method: 'delete'}
     };
     var output = {
-      get1: 'get ok',
-      //get2: 'get ok',
-      post1: 'post ok',
-      post2: 'post ok',
-      put: 'put ok',
-      delete: 'delete ok'
+      get1: 'GET ok',
+      //get2: 'GET ok',
+      post1: 'POST ok',
+      post2: 'POST ok',
+      put: 'PUT ok',
+      delete: 'DELETE ok'
     };
     testMuReq(input, output, done, 'POST');
   });
 
   it('/types DELETE (single)', (done) => {
     var input = typesUrl;
-    var output = 'delete ok';
+    var output = 'DELETE ok';
     testMuReq(input, output, done, 'delete');
   });
 

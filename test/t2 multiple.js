@@ -28,7 +28,7 @@ describe('Myltiple request', () => {
         {url: typesUrl, method: 'put'},
         {url: typesUrl, method: 'delete'}
       ];
-      var output = ['get ok', 'post ok', 'put ok', 'delete ok'];
+      var output = ['GET ok', 'POST ok', 'PUT ok', 'DELETE ok'];
       testMuReq(input, output, done);
     })
 
@@ -40,10 +40,10 @@ describe('Myltiple request', () => {
         delete: {url: typesUrl, method: 'delete'}
       };
       var output = {
-        get: 'get ok',
-        post: 'post ok',
-        put: 'put ok',
-        delete: 'delete ok'
+        get: 'GET ok',
+        post: 'POST ok',
+        put: 'PUT ok',
+        delete: 'DELETE ok'
       };
       
       testMuReq(input, output, done);
@@ -55,22 +55,22 @@ describe('Myltiple request', () => {
     var methodsInput = [typesUrl, typesUrl, typesUrl];
 
     it('get', (done) => {
-      var output = ['get ok', 'get ok', 'get ok'];
+      var output = ['GET ok', 'GET ok', 'GET ok'];
       testPromiseResult( muReq.get(methodsInput), output, done );
     })
 
     it('post', (done) => {
-      var output = ['post ok', 'post ok', 'post ok'];
+      var output = ['POST ok', 'POST ok', 'POST ok'];
       testPromiseResult( muReq.post(methodsInput), output, done );
     })
 
     it('put', (done) => {
-      var output = ['put ok', 'put ok', 'put ok'];
+      var output = ['PUT ok', 'PUT ok', 'PUT ok'];
       testPromiseResult( muReq.put(methodsInput), output, done );
     })
 
     it('delete', (done) => {
-      var output = ['delete ok', 'delete ok', 'delete ok'];
+      var output = ['DELETE ok', 'DELETE ok', 'DELETE ok'];
       testPromiseResult( muReq.delete(methodsInput), output, done );
     })
 
