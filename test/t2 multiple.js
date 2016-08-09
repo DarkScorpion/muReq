@@ -9,7 +9,6 @@ const PORT = 3002;
 const SERVER = app.listen(PORT);
 const BASE_URL = 'http://localhost:'+PORT;
 
-
 describe('Myltiple request', () => {
   describe('Single request', () => {
     it('Single', (done) => {

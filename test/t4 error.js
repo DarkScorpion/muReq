@@ -9,11 +9,7 @@ const PORT = 3004;
 const SERVER = app.listen(PORT);
 const BASE_URL = 'http://localhost:'+PORT;
 
-const ERRORS = {
-  notUrl: new Error('Invalid URI "notUrl"'),
-  manyErr: new Error('Many error returns'),
-  not200: new Error('Status code, is not 200')
-};
+const ERRORS = require('./errors.js');
 
 describe('Error in requests', () => {
   describe('Multiple', () => {
