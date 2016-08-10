@@ -1,7 +1,6 @@
 ## muReq - Multiple Request [![Build Status](https://travis-ci.org/DarkScorpion/muReq.svg?branch=m)](https://travis-ci.org/DarkScorpion/muReq)
 
 Module for multiple requests. It takes an array or object with the address of the request. Returns Promise with an array or object containing the result. Possible single request and customization of each individual request.  
-**Warning**: Function return body of response, if not errors and status code 200. But it can be disabled, see [errors example](#errors).
 
 ### Install
 ```
@@ -50,32 +49,44 @@ For custom request, use object with field of module [request](https://www.npmjs.
 //Custom metods
 var reqObj = {
   a1: {url: url+'1', method: 'post'},
-  a2: url+'2', //default method: GET
+  a2: url+'2',
   a3: {url: url+'3', method: 'put'}
 }
 muReq.get(reqObj)
   .then( (result) => {
     console.log(result) //=> { a1: 'post 1', a2: 'get 2', a3: 'put 3' }
   })
-
-//Specify the multi request method
+```
+##### Specify the multi request method
+```js
 muReq.post( [url+'1', url+'2', url+'3'] )
   .then( (result) => {
     console.log(result) //=> [ 'post 1', 'post 2', 'post 3' ]
   })
-
-//Use mix of metods
-var reqData = [
-  {url: url+'1', method: 'put'},
-  url+'2',
-  {url: url+'3', method: 'delete'},
-  url+'4',
-]
-muReq.post(reqData)
-  .then( (result) => {
-    console.log(result) //=> [ 'put 1', 'post 2', 'delete 3', 'post 4' ]
-  })
 ```
+##### Cloning configuration request fields
+If you want to make requests with certain fields at different urls, use the static method prepareData
+```js
+var url = 'http://test.zz/';
+var urls = [url+1, url+2, url+3];
+var options = {
+  method: 'POST',
+  headers: {
+    'User-Agent': 'request'
+  }
+};
+
+var result = muReq.prepareData(urls, options);
+
+console.log(result) 
+/* => [
+  { url: 'http://test.zz/1', { method: 'POST', headers: { 'User-Agent': 'request' } } },
+  { url: 'http://test.zz/2', { method: 'POST', headers: { 'User-Agent': 'request' } } },
+  { url: 'http://test.zz/3', { method: 'POST', headers: { 'User-Agent': 'request' } } }
+]
+*/
+```
+
 #### Settings
 You can customizate sittengs for you tasks.
 ```js
@@ -94,12 +105,17 @@ var reqData = [
   url+'/route404',
   'notUrl'
 ];
-muReq.request(reqData)
+muReq.get(reqData)
   .then( (result) => {
     console.log(result) //=> [ 'get 1', Error('Status code, is not 200'), Error('Invalid URI "notUrl"') ]
   })
 ```
-If you need all the status codes, use
+If you need all the status codes
 ```js
 muReq.setSettings({checkStatusCode: false});
+muReq.get(reqData)
+  .then( (result) => {
+    console.log(result) //=> [ 'get 1', 'route 404 data', Error('Invalid URI "notUrl"') ]
+  })
+
 ```
