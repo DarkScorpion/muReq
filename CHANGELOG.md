@@ -1,5 +1,9 @@
 ## Change Log
 
+### v1.1.1
+- Update readme.
+- Update tests.
+
 ### v1.1.0
 - Add static method prepareData, for cloning request options for different urls.
 

@@ -1,6 +1,6 @@
 ## muReq - Multiple Request [![Build Status](https://travis-ci.org/DarkScorpion/muReq.svg?branch=m)](https://travis-ci.org/DarkScorpion/muReq)
 
-Module for multiple requests. It takes an array or object with the address of the request. Returns Promise with an array or object containing the result. Possible single request and customization of each individual request.  
+Node.js module, for multiple and single requests with using Promises. It takes an array or object with the addreses of the request. Returns Promise with an array or object containing the result. Flexible customization down to the individual fields of the request.  
 
 ### Install
 ```
@@ -12,24 +12,13 @@ npm install mureq
 ```js
 var muReqClass = require('mureq');
 var muReq = new muReqClass(); //default settings
-var muReqCustom = new muReqClass({errCoef: 0.9}); //custom settings
-```
-
-#### Single request
-```js
-var url = 'http://test.zz/';
-
-muReq.get(url)
-  .then( (result) => {
-    console.log(result) //=> 'ok'
-  })
-  .catch( (err) => {
-    console.log(err)
-  });
+var muReqCustom = new muReqClass( {errCoef: 0.9} ); //custom settings
 ```
 
 #### Multi request
 ```js
+var url = 'http://test.zz/';
+
 //Multi request (array)
 muReq.get( [url+'1', url+'2', url+'3'] )
   .then( (result) => {
@@ -40,6 +29,32 @@ muReq.get( [url+'1', url+'2', url+'3'] )
 muReq.get( {a1: url+'1', a2: url+'2', a3: url+'3'} )
   .then( (result) => {
     console.log(result) //=> { a1: 'get 1', a2: 'get 2', a3: 'get 3' }
+  })
+```
+
+#### Single request
+```js
+muReq.get('http://test.zz/')
+  .then( (result) => {
+    console.log(result) //=> 'ok'
+  })
+  .catch( (err) => {
+    console.log(err)
+  });
+```
+
+#### Specify the multi request method (get, post, put, delete)
+```js
+var urls = [url+'1', url+'2', url+'3'];
+
+muReq.post(urls)
+  .then( (result) => {
+    console.log(result) //=> [ 'post 1', 'post 2', 'post 3' ]
+  })
+
+muReq.put(urls)
+  .then( (result) => {
+    console.log(result) //=> [ 'put 1', 'put 2', 'put 3' ]
   })
 ```
 
@@ -57,14 +72,8 @@ muReq.get(reqObj)
     console.log(result) //=> { a1: 'post 1', a2: 'get 2', a3: 'put 3' }
   })
 ```
-##### Specify the multi request method
-```js
-muReq.post( [url+'1', url+'2', url+'3'] )
-  .then( (result) => {
-    console.log(result) //=> [ 'post 1', 'post 2', 'post 3' ]
-  })
-```
-##### Cloning configuration request fields
+
+#### Cloning configuration request fields
 If you want to make requests with certain fields at different urls, use the static method prepareData
 ```js
 var url = 'http://test.zz/';
@@ -90,15 +99,17 @@ console.log(result)
 #### Settings
 You can customizate sittengs for you tasks.
 ```js
-
 { //Field of settings and their default value
   errCoef: 0.2, // if errors more 20%, promise return error;
   checkStatusCode: true // 404 and other status, considered an error
 }
+//Customizate example and check settings
+muReq.setSettings( {errCoef: 0.8} );
+console.log( muReq.getSettings() ); //=> { errCoef: 0.8, checkStatusCode: true }
 ```
 
 #### Errors
-Function return body of response, if not errors and status code 200. If there is no error, but the status code is not equal to 200, it will be returned Error('Status code, is not 200'). 
+Function return body of response, if not errors and status code 200. 
 ```js
 var reqData = [
   url+'1',
@@ -110,9 +121,9 @@ muReq.get(reqData)
     console.log(result) //=> [ 'get 1', Error('Status code, is not 200'), Error('Invalid URI "notUrl"') ]
   })
 ```
-If you need all the status codes
+If not need check status code, change settings.
 ```js
-muReq.setSettings({checkStatusCode: false});
+muReq.setSettings( {checkStatusCode: false} );
 muReq.get(reqData)
   .then( (result) => {
     console.log(result) //=> [ 'get 1', 'route 404 data', Error('Invalid URI "notUrl"') ]
