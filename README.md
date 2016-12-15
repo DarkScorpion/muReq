@@ -1,4 +1,7 @@
-## muReq - Multiple Request [![Build Status](https://travis-ci.org/DarkScorpion/muReq.svg?branch=m)](https://travis-ci.org/DarkScorpion/muReq)
+## muReq - Multiple Request  
+[![Build Status](https://travis-ci.org/DarkScorpion/muReq.svg?branch=m)](https://travis-ci.org/DarkScorpion/muReq)
+[![LiCENSE](https://img.shields.io/badge/license-MIT-blue.svg)](https://travis-ci.org/DarkScorpion/muReq)
+[![Downloads](https://img.shields.io/npm/dm/mureq.svg)](https://travis-ci.org/DarkScorpion/muReq)
 
 Node.js module, for multiple and single requests with using Promises. It takes an array or object with the addreses of the request. Returns Promise with an array or object containing the result. Flexible customization down to the individual fields of the request.  
 
