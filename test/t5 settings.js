@@ -17,18 +17,19 @@ describe('Settings', () => {
       var def = {
         errCoef: 0.2,
         checkStatusCode: true
-      }
-      assert.deepEqual(muReq.getSettings(), def);
+      };
+
+      checkSetings(muReq.getSettings(), def);
     });
 
     it('Create custom', () => {
       var s1 = {
         errCoef: 0.9,
         checkStatusCode: false
-      }
+      };
 
       var muReq = new muReqClass(s1);
-      assert.deepEqual(muReq.getSettings(), s1);
+      checkSetings(muReq.getSettings(), s1);
     });
 
     it('Set/Get (Lined)', () => {
@@ -46,18 +47,19 @@ describe('Settings', () => {
       muReq.setSettings(s2);
       assert.equal(muReq.getSettings().errCoef, 0.8);
 
-       var s3 = {
+      var s3 = {
         checkStatusCode: true
       };
+
       muReq.setSettings(s3);
       assert.equal(muReq.getSettings().checkStatusCode, true);
 
       var final = {
         errCoef: 0.8,
         checkStatusCode: true
-      }
+      };
 
-      assert.deepEqual(muReq.getSettings(), final);
+      checkSetings(muReq.getSettings(), final);
     });
   });
 
@@ -101,6 +103,7 @@ describe('Settings', () => {
           ERRORS.not200,
           ERRORS.notUrl
         ];
+        
         testMuReq(baseInput, output, done, {errCoef: 0.8, checkStatusCode: true});
       });
 
@@ -158,4 +161,10 @@ function testErr(input, output, done, settings) {
       assert.deepEqual(output, err);
       done();
     });
+}
+
+function checkSetings(input, output) {
+  for(var key in output) {
+    assert.equal(input[key], output[key]);
+  }
 }

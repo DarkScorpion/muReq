@@ -1,6 +1,6 @@
 ## muReq - Multiple Request  
 [![Build Status](https://travis-ci.org/DarkScorpion/muReq.svg?branch=m)](https://travis-ci.org/DarkScorpion/muReq)
-[![LiCENSE](https://img.shields.io/badge/license-MIT-blue.svg)](https://travis-ci.org/DarkScorpion/muReq)
+[![LICENSE](https://img.shields.io/badge/license-MIT-blue.svg)](https://travis-ci.org/DarkScorpion/muReq)
 [![Downloads](https://img.shields.io/npm/dt/mureq.svg)](https://travis-ci.org/DarkScorpion/muReq)
 [![Downloads in Month](https://img.shields.io/npm/dm/mureq.svg)](https://travis-ci.org/DarkScorpion/muReq)
 
@@ -106,11 +106,22 @@ You can customizate sittengs for you tasks.
 ```js
 { //Field of settings and their default value
   errCoef: 0.2, // if errors more 20%, promise return error;
-  checkStatusCode: true // 404 and other status, considered an error
+  checkStatusCode: true, // 404 and other status, considered an error
+  promise: Promise // native Node.js promise
 }
 //Customizate example and check settings
 muReq.setSettings( {errCoef: 0.8} );
 console.log( muReq.getSettings() ); //=> { errCoef: 0.8, checkStatusCode: true }
+```
+
+#### Use other promise library
+You can specify a different Promis library. Bluebird package (v 3.4.7) tested and works.
+```js
+var muReq = new muReqClass( { promise: require('bluebird') } );
+```
+or
+```js
+muReq.setSettings( { promise: require('bluebird') } );
 ```
 
 #### Errors

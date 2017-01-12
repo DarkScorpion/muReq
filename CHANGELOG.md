@@ -1,5 +1,10 @@
 ## Change Log
 
+### v1.2.0
+- Add new field in settings: promise
+- Tested compatibility with "bluebird" package.
+- Update readme (badges).
+
 ### v1.1.1
 - Update readme.
 - Update tests.
