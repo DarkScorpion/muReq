@@ -2,8 +2,7 @@
 var assert = require('assert');
 
 var app = require('./server.js');
-var muReqClass = require('../lib/multi-request.js');
-var muReq = new muReqClass();
+var muReq = require('../init.js')(); //test fast init script
 
 const PORT = 3002;
 const SERVER = app.listen(PORT);

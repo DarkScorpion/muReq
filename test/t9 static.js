@@ -1,7 +1,7 @@
 'use strict';
 var assert = require('assert');
 
-var muReqClass = require('../lib/multi-request.js');
+var muReqClass = require('../index.js');
 
 const ERROR = require('./errors.js');
 

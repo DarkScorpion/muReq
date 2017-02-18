@@ -1,8 +1,8 @@
 {
   "name": "mureq",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Module for Node.js, for single and multiple requests with using Promises.",
-  "main": "lib/multi-request.js",
+  "main": "index.js",
   "directories": {
     "test": "test"
   },

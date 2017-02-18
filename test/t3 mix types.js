@@ -2,7 +2,7 @@
 var assert  =require('assert');
 
 var app = require('./server.js');
-var muReqClass = require('../lib/multi-request.js');
+var muReqClass = require('../index.js'); //test standart creating class
 var muReq = new muReqClass();
 
 const PORT = 3003;
@@ -14,9 +14,9 @@ describe('Mix type request', () => {
 
   it('/types PUT (array)', (done) => {
     var input = [
-    typesUrl, //default method
-    {url: typesUrl, method: 'post'},
-    {url: typesUrl, method: 'get'},
+      typesUrl, //default method
+      {url: typesUrl, method: 'post'},
+      {url: typesUrl, method: 'get'},
     ];
     var output = [ 'PUT ok', 'POST ok', 'GET ok' ];
     testMuReq(input, output, done, 'put');

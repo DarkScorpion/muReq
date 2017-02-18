@@ -1,5 +1,9 @@
 ## Change Log
 
+### v1.2.1
+- add script for one-line create object of class.
+- update test.
+
 ### v1.2.0
 - Add new field in settings: promise
 - Tested compatibility with "bluebird" package.

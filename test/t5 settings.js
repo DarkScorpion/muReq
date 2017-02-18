@@ -2,7 +2,7 @@
 var assert = require('assert');
 
 var app = require('./server.js');
-var muReqClass = require('../lib/multi-request.js');
+var muReqClass = require('../index.js');
 
 const PORT = 3005;
 const SERVER = app.listen(PORT);

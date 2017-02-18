@@ -19,6 +19,10 @@ var muReqClass = require('mureq');
 var muReq = new muReqClass(); //default settings
 var muReqCustom = new muReqClass( {errCoef: 0.9} ); //custom settings
 ```
+or use one-line init script (can use settings object)
+```js
+var muReq = require('mureq/init')();
+```
 
 #### Multi request
 ```js

@@ -2,8 +2,7 @@
 var assert = require('assert');
 
 var app = require('./server.js');
-var muReqClass = require('../lib/multi-request.js');
-var muReq = new muReqClass({errCoef: 0.8}); //need many erros =)
+var muReq = require('../init.js')( {errCoef: 0.8} ); //test fast init script with params
 
 const PORT = 3004;
 const SERVER = app.listen(PORT);
