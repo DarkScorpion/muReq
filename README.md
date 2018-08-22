@@ -29,13 +29,13 @@ var muReq = require('mureq/init')();
 var url = 'http://test.zz/';
 
 //Multi request (array)
-muReq.get( [url+'1', url+'2', url+'3'] )
+muReq.get( [ url+'1', url+'2', url+'3' ] )
   .then( (result) => {
     console.log(result) //=> [ 'get 1', 'get 2', 'get 3' ]
   })
 
 //Multi request (object)
-muReq.get( {a1: url+'1', a2: url+'2', a3: url+'3'} )
+muReq.get( { a1: url+'1', a2: url+'2', a3: url+'3' } )
   .then( (result) => {
     console.log(result) //=> { a1: 'get 1', a2: 'get 2', a3: 'get 3' }
   })
@@ -54,7 +54,7 @@ muReq.get('http://test.zz/')
 
 #### Specify the multi request method (get, post, put, delete)
 ```js
-var urls = [url+'1', url+'2', url+'3'];
+var urls = [ url+'1', url+'2', url+'3' ];
 
 muReq.post(urls)
   .then( (result) => {
@@ -72,9 +72,9 @@ For custom request, use object with field of module [request](https://www.npmjs.
 ```js
 //Custom metods
 var reqObj = {
-  a1: {url: url+'1', method: 'post'},
+  a1: { url: url+'1', method: 'post' },
   a2: url+'2',
-  a3: {url: url+'3', method: 'put'}
+  a3: { url: url+'3', method: 'put' }
 }
 muReq.get(reqObj)
   .then( (result) => {
@@ -86,7 +86,7 @@ muReq.get(reqObj)
 If you want to make requests with certain fields at different urls, use the static method prepareData
 ```js
 var url = 'http://test.zz/';
-var urls = [url+1, url+2, url+3];
+var urls = [ url+1, url+2, url+3 ];
 var options = {
   method: 'POST',
   headers: {
