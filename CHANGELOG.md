@@ -1,5 +1,8 @@
 ## Change Log
 
+### v1.2.4
+- add bitbacket pipelines
+
 ### v1.2.1
 - add script for one-line create object of class.
 - update test.

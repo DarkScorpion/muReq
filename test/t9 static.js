@@ -14,9 +14,9 @@ describe('Static metods', () => {
       var input = muReqClass.prepareData(urls, options);
 
       var output = [
-        {url:'aaa', headers: 'test'},
-        {url:'bbb', headers: 'test'},
-        {url:'ccc', headers: 'test'}
+        { url:'aaa', headers: 'test' },
+        { url:'bbb', headers: 'test' },
+        { url:'ccc', headers: 'test' }
       ];
 
       assert.deepEqual(input, output);
@@ -25,18 +25,18 @@ describe('Static metods', () => {
 
     it('Prepare urls (object)', (done) => {
       var urls = {
-        a1:'aaa',
-        b1:'bbb',
-        c1:'ccc'
+        a1: 'aaa',
+        b1: 'bbb',
+        c1: 'ccc'
       };
       var options = {headers: 'test'};
 
       var input = muReqClass.prepareData(urls, options);
 
       var output = {
-        a1: {url:'aaa', headers: 'test'},
-        b1: {url:'bbb', headers: 'test'},
-        c1: {url:'ccc', headers: 'test'}
+        a1: { url:'aaa', headers: 'test' },
+        b1: { url:'bbb', headers: 'test' },
+        c1: { url:'ccc', headers: 'test' }
       };
 
       assert.deepEqual(input, output);
@@ -52,11 +52,11 @@ describe('Static metods', () => {
     });
 
     it('reqOptions is not Object', (done) => {
-      assert.deepEqual( muReqClass.prepareData(['aaa'], 'bbb'), ERROR.mustObj );
-      assert.deepEqual( muReqClass.prepareData({a1: 'aaa'}, []), ERROR.mustObj );
+      assert.deepEqual( muReqClass.prepareData([ 'aaa' ], 'bbb'), ERROR.mustObj );
+      assert.deepEqual( muReqClass.prepareData({ a1: 'aaa' }, []), ERROR.mustObj );
 
-      assert.deepEqual( muReqClass.prepareData( ['aaa'], 123 ), ERROR.mustObj );
-      assert.deepEqual( muReqClass.prepareData( {a1: 'aaa'}, /reg/i ), ERROR.mustObj );
+      assert.deepEqual( muReqClass.prepareData( [ 'aaa' ], 123 ), ERROR.mustObj );
+      assert.deepEqual( muReqClass.prepareData( { a1: 'aaa' }, /reg/i ), ERROR.mustObj );
       done();
     });
 

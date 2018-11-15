@@ -1,6 +1,6 @@
 {
   "name": "mureq",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "Module for Node.js, for single and multiple requests with using Promises.",
   "main": "index.js",
   "directories": {

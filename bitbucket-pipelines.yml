@@ -1,0 +1,15 @@
+image: node:8
+
+pipelines:
+  branches:
+    m:
+      - step:
+          caches:
+            - node
+          script:
+            - node -v
+            - npm -v
+            - npm install
+            - npm test
+            - printf "//`node -p \"require('url').parse(process.env.NPM_REGISTRY_URL || 'https://registry.npmjs.org').host\"`/:_authToken=${NPM_TOKEN}\nregistry=${NPM_REGISTRY_URL:-https://registry.npmjs.org}\n" >> ~/.npmrc
+            - npm publish

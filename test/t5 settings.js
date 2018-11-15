@@ -6,7 +6,7 @@ var muReqClass = require('../index.js');
 
 const PORT = 3005;
 const SERVER = app.listen(PORT);
-const BASE_URL = 'http://localhost:'+PORT;
+const BASE_URL = 'http://localhost:' + PORT;
 
 const ERRORS = require('./errors.js');
 
@@ -65,34 +65,35 @@ describe('Settings', () => {
 
   describe('errCoef option', () => {
     var baseInput = [
-      BASE_URL+'/',
-      BASE_URL+'/',
-      BASE_URL+'/route404',
+      BASE_URL + '/',
+      BASE_URL + '/',
+      BASE_URL + '/route404',
       'notUrl',
       'notUrl'
     ];
 
     it('Errors catch', (done) => {
-      testErr(baseInput, ERRORS.manyErr, done, {errCoef: 0.2});
+      testErr(baseInput, ERRORS.manyErr, done, { errCoef: 0.2 });
     });
 
     it('Errors pass', (done) => {
       var output = [
-        'ok', 'ok',
+        'ok',
+        'ok',
         ERRORS.not200,
         ERRORS.notUrl, ERRORS.notUrl
       ];
 
-      testMuReq(baseInput, output, done, {errCoef: 0.8});
+      testMuReq(baseInput, output, done, { errCoef: 0.8 });
     });
   });
 
   describe('notCheckStatus option', () => {
     describe('Multiple', () => {
       var baseInput = [
-        BASE_URL+'/',
-        BASE_URL+'/route404',
-        BASE_URL+'/route404',
+        BASE_URL + '/',
+        BASE_URL + '/route404',
+        BASE_URL + '/route404',
         'notUrl'
       ];
 
@@ -120,7 +121,7 @@ describe('Settings', () => {
     });
 
     describe('Single', () => {
-      var baseInput = BASE_URL+'/route404';
+      var baseInput = BASE_URL + '/route404';
 
       it('Check status', (done) => {
         var output = ERRORS.not200;
